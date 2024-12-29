@@ -1,6 +1,6 @@
 /**
  * @file constants.h
- * @brief Contains global constants used through the program.
+ * @brief Contains global constants used throughout the program.
  */
 #ifndef CONSTANTS_H
 #define CONSTANTS_H
