@@ -34,7 +34,7 @@ int main() {
         pdfProcessor.sortTransactions();
         pdfProcessor.printAllTransactions();
    
-        pdfProcessor.generateCsvFile(constants::CSV_FILE);
+        pdfProcessor.generateCsvFile(constants::CSV_FILE_NAME);
     }
     catch (const Exception& e) {
         LOG("Caught exception: \"", e.what(), "\"\n");

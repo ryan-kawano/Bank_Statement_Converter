@@ -114,7 +114,7 @@ void PdfProcessor::processPdfs(const std::string path) {
         bool lastFourFound = false;
         std::string lastFour;
         LOG("Going through ", numPages, " pages\n");
-        LOG("Looking for \"", constants::regex::TRANSACTION_TITLE, "\" first\n");
+        LOG("Looking for \"", constants::regex::TRANSACTION_SECTION_TITLE, "\" first\n");
         for (int i = 0; i < numPages; ++i) {
             LOG("Processing page ", i, "\n");
             poppler::page* currentPage = doc->create_page(i);
@@ -147,7 +147,7 @@ void PdfProcessor::processPdfs(const std::string path) {
                      Skip the 1st instance as that's in the document header/summary */
                     if (transactionTitleCount < 1) {
                         if (std::regex_search(line, constants::regex::transactionTitlePattern)) {
-                            LOG("Found \"", constants::regex::TRANSACTION_TITLE, "\". Parsing transactions now\n");
+                            LOG("Found \"", constants::regex::TRANSACTION_SECTION_TITLE, "\". Parsing transactions now\n");
                             transactionTitleCount++;
                         }
 
