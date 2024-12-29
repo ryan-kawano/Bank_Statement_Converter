@@ -19,7 +19,7 @@ public:
     /**
      * @brief Default constructor.
      * 
-     * It initializes the std::ofstream objects that are used to create the final output.
+     * Initializes the std::ofstream objects that are used to create the final output.
      */
     PdfProcessor() : skippedFiles("./" + constants::OUTPUT_DIRECTORY + "/" + constants::SKIPPED_FILES_FILE_NAME), skippedLines("./" + constants::OUTPUT_DIRECTORY + "/" + constants::SKIPPED_LINES_FILE_NAME) {};
 

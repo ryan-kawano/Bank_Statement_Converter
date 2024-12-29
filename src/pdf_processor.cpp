@@ -216,7 +216,6 @@ void PdfProcessor::closeSkippedLinesFile() {
     skippedLines.close();
 }
 
-
 /**
  * For the values that it already knows/was passed into the function, it will simply populate the Transaction object with those values.
  * For the values that it doesn't know, it'll extract the values from the line that was passed in by searching the line for various characters

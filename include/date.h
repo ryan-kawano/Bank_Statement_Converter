@@ -44,14 +44,14 @@ public:
     /**
      * @brief Overloaded assignment operator.
      * 
-     * @param Date The Date whose data you want to copy in this one.
+     * @param Date The Date whose data you want to copy.
      * 
      * @return The resulting Date object.
      */
     Date& operator=(const Date&);
 
     /**
-     * @brief Overloaded <= meant for comparing dates to one another chronologically.
+     * @brief Overloaded "<=" operator meant for comparing dates to one another chronologically.
      * 
      * Ex. Date #1 is less than Date #2 if Date #1 happened earlier than Date #2.
      * 
