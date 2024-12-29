@@ -1,0 +1,3 @@
+[submodule "RK_Logger"]
+	path = RK_Logger
+	url = https://github.com/rkawano518/RK_Logger
