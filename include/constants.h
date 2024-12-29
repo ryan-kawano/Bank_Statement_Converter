@@ -22,7 +22,7 @@ inline const std::string SKIPPED_FILES_FILE_NAME = "skipped_files.txt";
 
 namespace regex {
 
-    // Paterns
+    // Patterns
     inline const std::string PDF_FILE_NAME = "[0-9]{6} WellsFargo\\.pdf"; /**< ie. "102324 WellsFargo.pdf". Represents the standard file name pattern used by Wells Fargo when downloading statements from them */
     inline const std::string TRANSACTION = "^\\s*(\\d+)\\s+(\\d{2}/\\d{2})\\s+(\\d{2}/\\d{2})\\s+(\\S+)\\s+(.+?)\\s+((\\d|,)+\\.\\d{2})\\s*$";
     inline const std::string TRANSACTION_OLD = "^\\s*(\\d{2}/\\d{2})\\s+(\\d{2}/\\d{2})\\s+(\\S+)\\s+(.+?)\\s+((\\d|,)+\\.\\d{2})\\s*$"; /**< wells Fargo switched their format around August 2023. Old format didn't have last 4 of card for each transaction */
