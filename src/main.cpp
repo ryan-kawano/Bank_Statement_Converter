@@ -6,10 +6,10 @@
 #include <chrono>
 #include <filesystem>
 #include "logger/log.h"
-#include "pdf_processor.h"
-#include "exception_rk.h"
-#include "constants.h"
-#include "quick_sort.h"
+#include "wells_fargo_statement_converter/pdf_processor.h"
+#include "wells_fargo_statement_converter/exception_rk.h"
+#include "wells_fargo_statement_converter/constants.h"
+#include "wells_fargo_statement_converter/quick_sort.h"
 
 LOG_SETUP
 

@@ -2,7 +2,7 @@
  * @file exception_rk.cpp
  * @brief Source file for the custom Exception class.
  */
-#include "exception_rk.h"
+#include "wells_fargo_statement_converter/exception_rk.h"
 
 Exception::Exception(const std::string& msg) : message(msg) {}
 
