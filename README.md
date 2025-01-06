@@ -3,11 +3,16 @@ A tool for converting Wells Fargo bank statements in PDF format to CSV format. S
 
 The application can handle multiple PDF statements at once. It will parse through them, sort them by date, and will combine all of them into a single CSV file. Currently, it only processes transactions that had a subtractive impact on the account i.e. purchases, withdrawals, and interest charge on purchases (if it was a credit card statement). This means it will skip any credits, deposits into the account, etc. I plan to update the tool in the future to parse this data as well.
 
+## Output
 The final output will be in a file called `combined_statements.csv` and the format for each transaction will be:
+
 `"<LAST FOUR NUMBERS OF ACCOUNT>","TRANSACTION DATE","REFERENCE NUMBER","TRANSACTION NAME","CURRENCY AMOUNT"`.
+
 For example:
-`"1234","04/18/2023","78G41DS8VD89SF891","MCDONALDS RESTAURANT","-15.34"`
-It will also create these files in `output`:
+
+`"1234","04/18/2023","78G41DS8VD89SF891","MCDONALDS RESTAURANT","-15.34"`.
+
+It will also create these files:
 * logs.txt - These are the application logs. Refer to them if the CSV file wasn't generated or there were other problems during execution.
 * skipped_files.txt - This is a list of files that the tool skipped. Usually, it is because the PDF statement's file name didn't have the correct format.
 * skipped_lines.txt - This is a list of the individual lines in the statement that it skipped. Refer to this if there were any missing items in the final CSV file. It will only add lines that were possibly relevant i.e. had dollar symbols, had numbers, etc.
@@ -30,4 +35,4 @@ In order to use the tool, follow the steps below:
 Use a C++ compiler of your choice and compile the source files along with the `RK_Logger` submodule.
 
 ## Notes
-* This is a work-in-progress. New features are still being added and existing features are still being updated.
+* This is a work-in-progress. New features are still being added. Existing features are still being updated.
