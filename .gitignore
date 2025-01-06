@@ -1,0 +1,5 @@
+output
+build
+*.txt
+*.exe
+.vscode/settings.json
