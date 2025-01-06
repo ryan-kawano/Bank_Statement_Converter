@@ -3,8 +3,8 @@
  * @brief Source file for the Quick Sort class/algorithm.
  */
 #include <random>
-#include "quick_sort.h"
-#include "transaction.h"
+#include "wells_fargo_statement_converter/quick_sort.h"
+#include "wells_fargo_statement_converter/transaction.h"
 #include "logger/log.h"
 
 /**
