@@ -1,4 +1,6 @@
 # Wells Fargo Statement PDF to CSV Converter
+**This tool is not created or produced by Wells Fargo. It has no official affiliation with Wells Fargo.**
+
 A tool for converting Wells Fargo bank statements in PDF format to CSV format. Statements in CSV format are easier to handle and parse, so this tool aims to act as an intermediate step to convert statements into an easier-to-use format, for further use in other applications.
 
 The application can handle multiple PDF statements at once. It will parse through them, sort them by date, and will combine all of them into a single CSV file. Currently, it only processes transactions that had a subtractive impact on the account i.e. purchases, withdrawals, and interest charge on purchases (if it was a credit card statement). This means it will skip any credits, deposits into the account, etc. I plan to update the tool in the future to parse this data as well.
