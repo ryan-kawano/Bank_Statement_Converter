@@ -16,12 +16,12 @@ For example:
 
 It will also create these files:
 * logs.txt - These are the application logs. Refer to them if the CSV file wasn't generated or there were other problems during execution.
-* skipped_files.txt - This is a list of files that the tool skipped. Usually, it is because the PDF statement's file name didn't have the correct format.
-* skipped_lines.txt - This is a list of the individual lines in the statement that it skipped. Refer to this if there were any missing items in the final CSV file. It will only add lines that were possibly relevant i.e. had dollar symbols, had numbers, etc.
+* skipped_files.txt - This is a list of files that the tool skipped. A common error is that the statement file was renamed after downloading from Wells Fargo. See step 5 of the `Usage` section below for the proper format.
+* skipped_lines.txt - This is a list of the individual lines in the statement that were skipped. Refer to this if there were any missing items in the final CSV file. It will only add lines that were possibly relevant i.e. had dollar symbols, had numbers, etc.
 
 ## Usage
 In order to use the tool, follow the steps below:
-1. Download the executable file `Wells Fargo Statement PDF to CSV Converter.exe` from the `bin` directory of this repository. Currently, only the Windows executable is provided. In the future, I plan to compile the project for other platforms. You may compile the project for your preferred platform by yourself, if you wish.
+1. Download the executable file `Wells Fargo Statement PDF to CSV Converter.exe` from the `release` section of this repository. I recommend using the latest version. Currently, only the Windows executable is provided. In the future, I plan to compile the project for other platforms. You may compile the project for your preferred platform by yourself, if you wish.
 2. Create a new folder somewhere on your computer. For this example, it will be called `wells_fargo_converter`.
 3. Put the downloaded executable file in the folder.
 4. Create a folder within `wells_fargo_converter` called `statements_pdf`. The name of the folder must match exactly, including the casing.
