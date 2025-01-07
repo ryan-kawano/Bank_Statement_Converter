@@ -45,7 +45,7 @@ int main() {
         rk::log::closeLogFile();
     }
     catch (const std::filesystem::filesystem_error& e) {
-        LOG("Caught exception: \"", e.what(), "\"\n");
+        LOG("Caught a file exception: \"", e.what(), "\"\n");
         std::chrono::steady_clock::time_point endTime = std::chrono::steady_clock::now();
         auto duration = endTime - startTime;
         LOG("Exiting due to exception. Program took: ", std::chrono::duration_cast<std::chrono::milliseconds>(duration).count() / 1000.0, " sec\n");
