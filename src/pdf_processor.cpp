@@ -285,9 +285,6 @@ void PdfProcessor::generateTransaction(Transaction* transaction, std::string lin
     RK_LOG("Created transaction: ", transaction->getCsvFormat(), "\n");
 }
 
-/**
- * Calls an external sorting algorithm to sort the data. Sorts the data in-place, doesn't make or return a copy.
- */
 void PdfProcessor::sortTransactions() {
     RK_LOG("Sorting transactions\n");
     QuickSort::quickSort(transactions, 0, transactions.size() - 1);

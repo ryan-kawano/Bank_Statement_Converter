@@ -37,6 +37,7 @@ int main() {
         RK_LOG("Caught exception: \"", e.what(), "\"\n");
         std::chrono::steady_clock::time_point endTime = std::chrono::steady_clock::now();
         auto duration = endTime - startTime;
+        // duration_cast to milliseconds instead of seconds to preserve fractional portion
         RK_LOG("Exiting due to exception. Program took: ", std::chrono::duration_cast<std::chrono::milliseconds>(duration).count() / 1000.0, " sec\n");
         rk::log::stopLogger(std::move(logThread));
     }
@@ -44,6 +45,7 @@ int main() {
         RK_LOG("Caught a file exception: \"", e.what(), "\"\n");
         std::chrono::steady_clock::time_point endTime = std::chrono::steady_clock::now();
         auto duration = endTime - startTime;
+        // duration_cast to milliseconds instead of seconds to preserve fractional portion
         RK_LOG("Exiting due to exception. Program took: ", std::chrono::duration_cast<std::chrono::milliseconds>(duration).count() / 1000.0, " sec\n");
         rk::log::stopLogger(std::move(logThread));
     }
