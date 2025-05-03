@@ -5,14 +5,14 @@
 #include <random>
 #include "wells_fargo_statement_converter/quick_sort.h"
 #include "wells_fargo_statement_converter/transaction.h"
-#include "logger/log.h"
+#include "rk_logger/logger.h"
 
 /**
  * Chooses a random pivot by using the std::mt19937 random-number generator. Moves everything less than or equal
  * to the pivot, to the left of the pivot by using std::swap.
  */
 int QuickSort::partition(std::vector<Transaction*>& vec, int lower, int higher) {
-    LOG("Entering partition func\n");
+    RK_LOG("Entering partition func\n");
 
     std::random_device rd; // For generating random pivot. Optimize this later
     std::mt19937 gen(rd()); // For generating random pivot. Optimize this later
@@ -40,7 +40,7 @@ int QuickSort::partition(std::vector<Transaction*>& vec, int lower, int higher) 
 }
 
 void QuickSort::quickSort(std::vector<Transaction*>& vec, int lower, int higher) {
-    LOG("Entering quickSort func\n");
+    RK_LOG("Entering quickSort func\n");
 
     if (lower < higher) {
         int pivotIndex = partition(vec, lower, higher);

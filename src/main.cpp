@@ -5,19 +5,16 @@
 #include <thread>
 #include <chrono>
 #include <filesystem>
-#include "logger/log.h"
+#include "rk_logger/logger.h"
 #include "wells_fargo_statement_converter/pdf_processor.h"
 #include "wells_fargo_statement_converter/exception_rk.h"
 #include "wells_fargo_statement_converter/constants.h"
 #include "wells_fargo_statement_converter/quick_sort.h"
 
-LOG_SETUP
-
 int main() {
-    LOG_VERIFY
-    std::thread logThread = rk::log::startLogThread();
+    std::thread logThread = rk::log::startLogger();
     const std::chrono::steady_clock::time_point startTime = std::chrono::steady_clock::now();
-    LOG("Starting program\n");
+    RK_LOG("Starting program\n");
 
     try {         
         if (!std::filesystem::exists(constants::OUTPUT_DIRECTORY)) {
@@ -37,27 +34,25 @@ int main() {
         pdfProcessor.generateCsvFile(constants::CSV_FILE_NAME);
     }
     catch (const Exception& e) {
-        LOG("Caught exception: \"", e.what(), "\"\n");
+        RK_LOG("Caught exception: \"", e.what(), "\"\n");
         std::chrono::steady_clock::time_point endTime = std::chrono::steady_clock::now();
         auto duration = endTime - startTime;
-        LOG("Exiting due to exception. Program took: ", std::chrono::duration_cast<std::chrono::milliseconds>(duration).count() / 1000.0, " sec\n");
-        rk::log::endLogThread(logThread);
-        rk::log::closeLogFile();
+        RK_LOG("Exiting due to exception. Program took: ", std::chrono::duration_cast<std::chrono::milliseconds>(duration).count() / 1000.0, " sec\n");
+        rk::log::stopLogger(std::move(logThread));
     }
     catch (const std::filesystem::filesystem_error& e) {
-        LOG("Caught a file exception: \"", e.what(), "\"\n");
+        RK_LOG("Caught a file exception: \"", e.what(), "\"\n");
         std::chrono::steady_clock::time_point endTime = std::chrono::steady_clock::now();
         auto duration = endTime - startTime;
-        LOG("Exiting due to exception. Program took: ", std::chrono::duration_cast<std::chrono::milliseconds>(duration).count() / 1000.0, " sec\n");
-        rk::log::endLogThread(logThread);
-        rk::log::closeLogFile();
+        RK_LOG("Exiting due to exception. Program took: ", std::chrono::duration_cast<std::chrono::milliseconds>(duration).count() / 1000.0, " sec\n");
+        rk::log::stopLogger(std::move(logThread));
     }
 
     std::chrono::steady_clock::time_point endTime = std::chrono::steady_clock::now();
     auto duration = endTime - startTime;
-    LOG("Finished successfully. Program took: ", std::chrono::duration_cast<std::chrono::milliseconds>(duration).count() / 1000.0, " sec\n");
+    RK_LOG("Finished successfully. Program took: ", std::chrono::duration_cast<std::chrono::milliseconds>(duration).count() / 1000.0, " sec\n");
 
-    rk::log::endLogThread(logThread);
-    rk::log::closeLogFile();
+    rk::log::stopLogger(std::move(logThread));
+
     return 0;
 }
