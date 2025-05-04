@@ -98,7 +98,6 @@ void PdfProcessor::processPdfs(const std::string path) {
         const std::string year = "20" + file.substr(slashIndex + 5, 2);
         const bool isJanuaryStatement = month == "01";
 
-        // Load pdf doc via poppler
         poppler::document* doc = poppler::document::load_from_file(file);
         if (!doc) {
             RK_LOG("Error: Could not open PDF file ", file, ". Exiting\n");
@@ -121,14 +120,13 @@ void PdfProcessor::processPdfs(const std::string path) {
             if (currentPage) {
                 RK_LOG("Successfully opened page with poppler.\n");
 
-                // Extract text from the current page
                 std::vector<char> byte_array = currentPage->text().to_utf8();
-                std::stringstream text;
-                text.write(byte_array.data(), byte_array.size());
+                std::stringstream currPageText;
+                currPageText.write(byte_array.data(), byte_array.size());
                 std::string line;
 
                 // Go through line by line
-                while (std::getline(text, line)) {
+                while (std::getline(currPageText, line)) {
                     RK_LOG("Processing line: ", line,  "\n");
 
                     // Extract last four
@@ -180,7 +178,7 @@ void PdfProcessor::processPdfs(const std::string path) {
                             skippedLines << trim(line) << "\n";
                         }
                     }
-                    // Normal transactions that use the old format.
+                    // Normal transactions that use the old format
                     else if (std::regex_match(line, constants::regex::transactionPatternOld)) { 
                         if (!std::regex_search(line, constants::regex::transactionSkip)) {
                             RK_LOG("Line matched old pattern. Saving\n");

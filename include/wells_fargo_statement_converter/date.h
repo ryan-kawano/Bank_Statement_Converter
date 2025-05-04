@@ -35,7 +35,7 @@ public:
     Date(const Date&);
 
     /**
-     * @brief Formats the date in a user-friendly format and returns it. It will be in the format "[MM/DD/YYYY]".
+     * @brief Formats the date in a user-friendly format and returns it.
      * 
      * @return The formatted date.
      */

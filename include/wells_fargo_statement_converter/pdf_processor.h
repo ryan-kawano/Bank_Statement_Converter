@@ -18,8 +18,6 @@ class PdfProcessor  {
 public:
     /**
      * @brief Default constructor.
-     * 
-     * Initializes the std::ofstream objects that are used to create the final output.
      */
     PdfProcessor() : skippedFiles("./" + constants::OUTPUT_DIRECTORY + "/" + constants::SKIPPED_FILES_FILE_NAME), skippedLines("./" + constants::OUTPUT_DIRECTORY + "/" + constants::SKIPPED_LINES_FILE_NAME) {};
 
@@ -84,7 +82,7 @@ public:
      */
     void printAllTransactions();
 private:
-    std::vector<std::string> pdfFiles; /**< Container to hold a list of PDF file names */
+    std::vector<std::string> pdfFiles;
     std::ofstream skippedFiles; /**< Any files that were skipped during the file gathering process */
     std::ofstream skippedLines; /**< Any lines in the PDF statements that were skipped during processing */
     std::vector<Transaction*> transactions; /**< Container to hold all of the transaction data */

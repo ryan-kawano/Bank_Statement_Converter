@@ -14,7 +14,7 @@
 int main() {
     std::thread logThread = rk::log::startLogger();
     const std::chrono::steady_clock::time_point startTime = std::chrono::steady_clock::now();
-    RK_LOG("Starting program\n");
+    RK_LOG("Starting \"Wells Fargo Statement PDF to CSV Converter\"\n");
 
     try {         
         if (!std::filesystem::exists(constants::OUTPUT_DIRECTORY)) {
@@ -44,6 +44,7 @@ int main() {
 
     std::chrono::steady_clock::time_point endTime = std::chrono::steady_clock::now();
     auto duration = endTime - startTime;
+    // duration_cast to milliseconds instead of seconds to preserve fractional portion
     RK_LOG("Finished successfully. Program took: ", std::chrono::duration_cast<std::chrono::milliseconds>(duration).count() / 1000.0, " sec\n");
 
     rk::log::stopLogger(std::move(logThread));
