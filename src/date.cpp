@@ -10,7 +10,7 @@ Date::Date(const int pYear, const int pMonth, const int pDay) : year(pYear), mon
 
 Date::Date(const Date& pDate) : year(pDate.year), month(pDate.month), day(pDate.day) {}
 
-std::string Date::getDateString() {
+std::string Date::getDateString() const {
     return "[" + std::to_string(month) + "/" + std::to_string(day) + "/" + std::to_string(year) + "]";
 }
 
@@ -41,14 +41,14 @@ bool Date::operator<=(const Date& other) const {
     return day <= other.day;
 }
 
-int const Date::getYear() {
+int Date::getYear() const{
     return year;
 }
 
-int const Date::getMonth() {
+int Date::getMonth() const {
     return month;
 }
 
-int const Date::getDay() {
+int Date::getDay() const {
     return day;
 }

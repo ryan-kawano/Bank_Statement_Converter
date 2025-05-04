@@ -39,7 +39,7 @@ public:
      * 
      * @return The formatted date.
      */
-    std::string getDateString();
+    std::string getDateString() const;
 
     /**
      * @brief Overloaded assignment operator.
@@ -66,21 +66,21 @@ public:
      * 
      * @return Year value.
      */
-    int const getYear();
+    int getYear() const;
 
     /**
      * @brief Getter for month.
      * 
      * @return Month value.
      */
-    int const getMonth();
+    int getMonth() const;
 
     /**
      * @brief Getter for day.
      * 
      * @return Day value.
      */
-    int const getDay();
+    int getDay() const;
 private:
     int year;
     int month;
