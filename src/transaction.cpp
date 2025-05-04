@@ -8,10 +8,10 @@
 
 Transaction::Transaction() {}
 
-Transaction::Transaction(const double pAmount, const std::string pName, const Date& pDate, const std::string pReferenceNum, const std::string pLastFour)
-    : amount(pAmount), name(pName), date(pDate), referenceNum(pReferenceNum), lastFour(pLastFour) {}
+Transaction::Transaction(const double pCurrencyAmount, const std::string pName, const Date& pDate, const std::string pReferenceNum, const std::string pLastFour)
+    : currencyAmount(pCurrencyAmount), name(pName), date(pDate), referenceNum(pReferenceNum), lastFour(pLastFour) {}
 
-std::string Transaction::getCsvFormat() {
+std::string Transaction::getInCsvFormat() const {
     std::ostringstream oss;
     // Last four
     oss << "\"" << lastFour << "\",";
@@ -33,19 +33,20 @@ std::string Transaction::getCsvFormat() {
 
     // Amount
     oss << "\"";
-    oss << std::fixed << std::setprecision(2) << -amount;
+    oss << std::fixed << std::setprecision(2) << -currencyAmount;
     oss << "\"";
 
     return oss.str();
 }
 
-Date& Transaction::getDate() {
+const Date& Transaction::getDate() const {
     return date;
 }
 
-void Transaction::setAmount(const double pAmount) {
-    amount = pAmount;
+void Transaction::setCurrencyAmount(const double pCurrencyAmount) {
+    currencyAmount = pCurrencyAmount;
 }
+
 void Transaction::setName(const std::string pName) {
     name = pName;
 }

@@ -16,7 +16,7 @@
 #include "wells_fargo_statement_converter/constants.h"
 #include "wells_fargo_statement_converter/quick_sort.h"
 
-std::string PdfProcessor::trim(const std::string str) {
+std::string PdfProcessor::trim(const std::string str) const {
     RK_LOG("Trimming:", str, "\n");
     std::string result = str;
     size_t leading = result.find_first_not_of(" \t\n\r");
@@ -270,7 +270,7 @@ void PdfProcessor::generateTransaction(Transaction* transaction, std::string lin
     amountStr.erase(std::remove(amountStr.begin(), amountStr.end(), ','), amountStr.end()); // Remove comma
     const double amount = std::stod(amountStr);
     RK_LOG("Setting amount to ", amount, "\n");
-    transaction->setAmount(amount);
+    transaction->setCurrencyAmount(amount);
     line = line.substr(0, amountIdx - 1); // Remove amount from line
 
     // Name of transaction
@@ -280,7 +280,7 @@ void PdfProcessor::generateTransaction(Transaction* transaction, std::string lin
     RK_LOG("Setting name to ", name, "\n");
     transaction->setName(name);
 
-    RK_LOG("Created transaction: ", transaction->getCsvFormat(), "\n");
+    RK_LOG("Created transaction: ", transaction->getInCsvFormat(), "\n");
 }
 
 void PdfProcessor::sortTransactions() {
@@ -310,16 +310,16 @@ void PdfProcessor::generateCsvFile(const std::string fileName) {
     }
 
     for (auto& transaction : transactions) {
-        csvFile << transaction->getCsvFormat() << "\n";
+        csvFile << transaction->getInCsvFormat() << "\n";
     }
 
     csvFile.close();
 }
 
-void PdfProcessor::printAllTransactions() {
+void PdfProcessor::printAllTransactions() const {
     RK_LOG("Printing all transactions\n");
     for (auto transaction : transactions) {
-        RK_LOG(transaction->getCsvFormat(), "\n");
+        RK_LOG(transaction->getInCsvFormat(), "\n");
     }
     RK_LOG("Finished printing all transactions\n");
 }

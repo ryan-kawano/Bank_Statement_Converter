@@ -28,7 +28,7 @@ public:
      * @param std::string The reference number of the transaction.
      * @param std::string The last four digits of the account number of the transaction.
      */
-    Transaction(const double /* amount */, const std::string /* name */, const Date& /* date */, const std::string /* reference num */, const std::string /* last four */);
+    Transaction(const double /* currencyAmount */, const std::string /* name */, const Date& /* date */, const std::string /* reference num */, const std::string /* last four */);
 
     /**
      * @brief Accesses the member values that hold the transaction data and combines them all together, separated by commas.
@@ -38,21 +38,21 @@ public:
      * 
      * @return The formatted csv string.
      */
-    std::string getCsvFormat();
+    std::string getInCsvFormat() const;
 
     /**
      * @brief Getter for Date.
      * 
      * @return Date object.
      */
-    Date& getDate();
+    const Date& getDate() const;
 
     /**
-     * @brief Setter for amount.
+     * @brief Setter for currencyAmount.
      * 
-     * @param double The amount.
+     * @param double The currency amount.
      */
-    void setAmount(const double);
+    void setCurrencyAmount(const double);
 
     /**
      * @brief Setter for name.
@@ -82,7 +82,7 @@ public:
      */
     void setLastFour(const std::string);
 private:
-    double amount; /**< The currency amount */
+    double currencyAmount;
     std::string name;
     Date date;
     std::string referenceNum;

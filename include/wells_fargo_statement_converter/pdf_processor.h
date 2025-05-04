@@ -28,7 +28,7 @@ public:
      * 
      * @return The trimmed string.
      */
-    std::string trim(const std::string);
+    std::string trim(const std::string) const;
 
     /**
      * @brief Goes through the directory that holds the PDF statements and adds them to a list. It only adds files that match a certain pattern.
@@ -80,7 +80,7 @@ public:
     /**
      * @brief Utility function to print all of the transaction to the console.
      */
-    void printAllTransactions();
+    void printAllTransactions() const;
 private:
     std::vector<std::string> pdfFiles;
     std::ofstream skippedFiles; /**< Any files that were skipped during the file gathering process */
