@@ -158,7 +158,7 @@ void PdfProcessor::processPdfs(const std::string path) {
                             RK_LOG("Line matched pattern. Saving\n");
                             Transaction* transaction = new Transaction();
                             generateTransaction(transaction, line, std::stoi(year), isJanuaryStatement, lastFour, false, false);
-                            transactions.push_back(transaction);
+                            saveTransaction(transaction);
                         }
                         else {
                             RK_LOG("Line matched pattern, but is in the skip list. Skipping and adding to skipped file\n");
@@ -171,7 +171,7 @@ void PdfProcessor::processPdfs(const std::string path) {
                             RK_LOG("Line matched pattern. It is interest charge. Saving\n");
                             Transaction* transaction = new Transaction();
                             generateTransaction(transaction, line, std::stoi(year), isJanuaryStatement, lastFour, false, true);
-                            transactions.push_back(transaction);
+                            saveTransaction(transaction);
                         }
                         else {
                             RK_LOG("Line matched pattern, but is in the skip list. Skipping and adding to skipped file\n");
@@ -184,7 +184,7 @@ void PdfProcessor::processPdfs(const std::string path) {
                             RK_LOG("Line matched old pattern. Saving\n");
                             Transaction* transaction = new Transaction();
                             generateTransaction(transaction, line, std::stoi(year), isJanuaryStatement, lastFour, true, false);
-                            transactions.push_back(transaction);
+                            saveTransaction(transaction);
                         }
                         else {
                             RK_LOG("Line matched old pattern, but is in the skip list. Skipping and adding to skipped file\n");
@@ -204,6 +204,10 @@ void PdfProcessor::processPdfs(const std::string path) {
         }
         delete doc;
     }
+}
+
+void PdfProcessor::saveTransaction(Transaction* transaction) {
+    transactions.push_back(transaction);
 }
 
 void PdfProcessor::closeSkippedFilesFile() {
@@ -322,4 +326,8 @@ void PdfProcessor::printAllTransactions() const {
         RK_LOG(transaction->getInCsvFormat(), "\n");
     }
     RK_LOG("Finished printing all transactions\n");
+}
+
+size_t PdfProcessor::count() const {
+    return transactions.size();
 }

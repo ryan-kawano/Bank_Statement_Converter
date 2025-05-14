@@ -15,13 +15,13 @@ int main() {
     std::thread logThread = rk::log::startLogger();
     const std::chrono::steady_clock::time_point startTime = std::chrono::steady_clock::now();
     RK_LOG("Starting \"Wells Fargo Statement PDF to CSV Converter\"\n");
+    PdfProcessor pdfProcessor;
 
     try {         
         if (!std::filesystem::exists(constants::OUTPUT_DIRECTORY)) {
             std::filesystem::create_directory(constants::OUTPUT_DIRECTORY);
         }
-        
-        PdfProcessor pdfProcessor;
+
         pdfProcessor.gatherPdfFiles("./" + constants::PDF_DIRECTORY);
         pdfProcessor.closeSkippedFilesFile();
  
@@ -45,7 +45,7 @@ int main() {
     std::chrono::steady_clock::time_point endTime = std::chrono::steady_clock::now();
     auto duration = endTime - startTime;
     // duration_cast to milliseconds instead of seconds to preserve fractional portion
-    RK_LOG("Finished successfully. Program took: ", std::chrono::duration_cast<std::chrono::milliseconds>(duration).count() / 1000.0, " sec\n");
+    RK_LOG("Finished successfully. Processed ", pdfProcessor.count(), " transactions in ", std::chrono::duration_cast<std::chrono::milliseconds>(duration).count() / 1000.0, " sec\n");
 
     rk::log::stopLogger(std::move(logThread));
 
