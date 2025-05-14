@@ -68,6 +68,13 @@ public:
     void generateTransaction(Transaction*, std::string, const int, const bool, const std::string, const bool, const bool);
 
     /**
+     * @brief Saves a transaction in the class.
+     * 
+     * @param Transaction The Transaction object to save.
+     */
+    void saveTransaction(Transaction*);
+
+    /**
      * @brief Sorts the internally stored transactions.
      */
     void sortTransactions();
@@ -81,11 +88,18 @@ public:
      * @brief Utility function to print all of the transaction to the console.
      */
     void printAllTransactions() const;
+
+    /**
+     * @brief Gets the total number of transactions.
+     * 
+     * @return Total number of transactions.
+     */
+    size_t count() const;
 private:
     std::vector<std::string> pdfFiles;
     std::ofstream skippedFiles; /**< Any files that were skipped during the file gathering process */
     std::ofstream skippedLines; /**< Any lines in the PDF statements that were skipped during processing */
-    std::vector<Transaction*> transactions; /**< Container to hold all of the transaction data */
+    std::vector<Transaction*> transactions;
 };
 
 #endif
