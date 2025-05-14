@@ -31,6 +31,14 @@ public:
     Transaction(const double /* currencyAmount */, const std::string /* name */, const Date& /* date */, const std::string /* reference num */, const std::string /* last four */);
 
     /**
+     * @brief Overloaded <= operator.
+     * 
+     * @param Transaction The Transaction to compare to.
+     * @return The result of the comparison.
+     */
+    bool operator<=(const Transaction&);
+
+    /**
      * @brief Accesses the member values that hold the transaction data and combines them all together, separated by commas.
      * 
      * Example output:
