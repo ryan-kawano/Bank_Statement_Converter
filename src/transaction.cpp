@@ -11,6 +11,10 @@ Transaction::Transaction() {}
 Transaction::Transaction(const double pCurrencyAmount, const std::string pName, const Date& pDate, const std::string pReferenceNum, const std::string pLastFour)
     : currencyAmount(pCurrencyAmount), name(pName), date(pDate), referenceNum(pReferenceNum), lastFour(pLastFour) {}
 
+bool Transaction::operator<=(const Transaction& other) {
+    return this->getDate() <= other.getDate();
+}
+
 std::string Transaction::getInCsvFormat() const {
     std::ostringstream oss;
     // Last four

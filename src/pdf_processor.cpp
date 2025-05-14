@@ -285,7 +285,7 @@ void PdfProcessor::generateTransaction(Transaction* transaction, std::string lin
 
 void PdfProcessor::sortTransactions() {
     RK_LOG("Sorting transactions\n");
-    QuickSort::quickSort(transactions, 0, transactions.size() - 1);
+    QuickSort<Transaction>::quickSort(transactions, 0, transactions.size() - 1);
     RK_LOG("Finished sorting transactions\n");
 }
 
