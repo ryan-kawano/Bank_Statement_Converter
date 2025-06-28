@@ -3,3 +3,4 @@ build
 *.txt
 *.exe
 .vscode/settings.json
+statements_pdf
