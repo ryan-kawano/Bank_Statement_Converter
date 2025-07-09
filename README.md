@@ -4,7 +4,7 @@
 <h3 align="center">Bank Statement Converter</h3>
 
   <p align="center">
-    A tool to convert bank statements from human-readable formats to formats that more machine-friendly.
+    A tool to convert bank statements from human-readable formats to formats that are more machine-friendly.
     <br />
   </p>
 </div>
