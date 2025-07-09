@@ -32,7 +32,7 @@
       <a href="#getting-started">Getting Started</a>
       <ul>
         <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
+        <li><a href="#building">Building</a></li>
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
@@ -108,7 +108,11 @@ You may either download the compiled program from the release section of this Gi
 ### Building
 
 <ol>
-  <li>Clone this repo, along with the submodules.<code>git clone --recurse-submodules https://www..</code></li>
+  <li>Clone this repo, along with the submodules.
+
+<code>git clone --recurse-submodules https://github.com/ryan-kawano/Bank_Statement_Converter</code>
+
+  </li>
   <li>Build the project in Visual Studio Code using the provided VS Code setting files <a href=".vscode/launch.json">launch.json</a> and <a href=".vscode/tasks.json">tasks.json</a>. They might need to be updated based on what compiler you are using and where you have Poppler installed. I recommend getting it from MSYS2 in order to match the files.</li>
 </ol>
 
