@@ -143,14 +143,6 @@ You may either download the compiled program from the release section of this Gi
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 
-<!-- [contributors-shield]: https://img.shields.io/github/contributors/ryan-kawano/RK_Logger.svg?style=for-the-badge
-[contributors-url]: https://github.com/ryan-kawano/RK_Logger/graphs/contributors
-[issues-shield]: https://img.shields.io/github/issues/ryan-kawano/RK_Logger.svg?style=for-the-badge
-[issues-url]: https://github.com/ryan-kawano/RK_Logger/issues -->
-
-[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-[linkedin-url]: http://www.linkedin.com/in/ryan-kawano-74bab922b
-[product-screenshot]: images/screenshot.png
 [C++]: https://img.shields.io/badge/-C++-blue?logo=cplusplus
 [C++-url]: https://en.wikipedia.org/wiki/C%2B%2B
 [Poppler]: https://img.shields.io/badge/Poppler-blue.svg?style=flat-square
