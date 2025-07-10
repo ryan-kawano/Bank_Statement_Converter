@@ -6,7 +6,6 @@
 #define QUICK_SORT_H
 
 #include <random>
-#include "transaction.h"
 
 /**
  * @class QuickSort
