@@ -4,7 +4,7 @@
  */
 #include <sstream>
 #include <iomanip>
-#include "wells_fargo_statement_converter/transaction.h"
+#include "bank_statement_converter/transaction.h"
 
 Transaction::Transaction() {}
 

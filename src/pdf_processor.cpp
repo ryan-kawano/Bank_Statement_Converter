@@ -10,11 +10,11 @@
 #include <poppler/cpp/poppler-document.h>
 #include <poppler/cpp/poppler-page.h>
 #include <poppler/cpp/poppler-rectangle.h>
-#include "wells_fargo_statement_converter/pdf_processor.h"
+#include "bank_statement_converter/pdf_processor.h"
 #include "rk_logger/logger.h"
-#include "wells_fargo_statement_converter/exception_rk.h"
-#include "wells_fargo_statement_converter/constants.h"
-#include "wells_fargo_statement_converter/quick_sort.h"
+#include "bank_statement_converter/exception_rk.h"
+#include "bank_statement_converter/constants.h"
+#include "bank_statement_converter/quick_sort.h"
 
 std::string PdfProcessor::trim(const std::string str) const {
     RK_LOG("Trimming:", str, "\n");
@@ -55,7 +55,7 @@ void PdfProcessor::gatherPdfFiles(const std::string path) {
     for (const auto& entry : std::filesystem::directory_iterator(path)) {
         fileName = entry.path().filename().string();
         RK_LOG("Processing file ", fileName, "\n");
-        if (std::regex_match(fileName, constants::regex::pdfFilePattern)) {
+        if (std::regex_match(fileName, constants::wells_fargo::regex::pdfFilePattern)) {
             RK_LOG("File ", fileName, " matched the pattern. Adding it to the list for further processing\n");
             pdfFiles.push_back(entry.path().string());
         }
@@ -113,7 +113,7 @@ void PdfProcessor::processPdfs(const std::string path) {
         bool lastFourFound = false;
         std::string lastFour;
         RK_LOG("Going through ", numPages, " pages\n");
-        RK_LOG("Looking for \"", constants::regex::TRANSACTION_SECTION_TITLE, "\" first\n");
+        RK_LOG("Looking for \"", constants::wells_fargo::regex::TRANSACTION_SECTION_TITLE, "\" first\n");
         for (int i = 0; i < numPages; ++i) {
             RK_LOG("Processing page ", i, "\n");
             poppler::page* currentPage = doc->create_page(i);
@@ -131,7 +131,7 @@ void PdfProcessor::processPdfs(const std::string path) {
 
                     // Extract last four
                     if (!lastFourFound) {
-                        if (std::regex_search(line, constants::regex::lastFourPattern)) {
+                        if (std::regex_search(line, constants::wells_fargo::regex::lastFourPattern)) {
                             RK_LOG("Line matched last four pattern. Extracting last four\n");
                             lastFour = line.substr(line.rfind(' ') + 1, 4);
                             RK_LOG("Extracted last four value: ", lastFour, "\n");
@@ -144,8 +144,8 @@ void PdfProcessor::processPdfs(const std::string path) {
                      after this title and we don't want to parse things that come before like credits.
                      Skip the 1st instance as that's in the document header/summary */
                     if (transactionTitleCount < 1) {
-                        if (std::regex_search(line, constants::regex::transactionTitlePattern)) {
-                            RK_LOG("Found \"", constants::regex::TRANSACTION_SECTION_TITLE, "\". Parsing transactions now\n");
+                        if (std::regex_search(line, constants::wells_fargo::regex::transactionTitlePattern)) {
+                            RK_LOG("Found \"", constants::wells_fargo::regex::TRANSACTION_SECTION_TITLE, "\". Parsing transactions now\n");
                             transactionTitleCount++;
                         }
 
@@ -153,8 +153,8 @@ void PdfProcessor::processPdfs(const std::string path) {
                     }
 
                     // Normal transactions
-                    if (std::regex_match(line, constants::regex::transactionPattern)) {
-                        if (!std::regex_search(line, constants::regex::transactionSkip)) {
+                    if (std::regex_match(line, constants::wells_fargo::regex::transactionPattern)) {
+                        if (!std::regex_search(line, constants::wells_fargo::regex::transactionSkip)) {
                             RK_LOG("Line matched pattern. Saving\n");
                             Transaction* transaction = new Transaction();
                             generateTransaction(transaction, line, std::stoi(year), isJanuaryStatement, lastFour, false, false);
@@ -166,8 +166,8 @@ void PdfProcessor::processPdfs(const std::string path) {
                         }
                     }
                     // Interest charges
-                    else if (std::regex_match(line, constants::regex::transactionPatternInterest)) {
-                        if (!std::regex_search(line, constants::regex::transactionSkip)) {
+                    else if (std::regex_match(line, constants::wells_fargo::regex::transactionPatternInterest)) {
+                        if (!std::regex_search(line, constants::wells_fargo::regex::transactionSkip)) {
                             RK_LOG("Line matched pattern. It is interest charge. Saving\n");
                             Transaction* transaction = new Transaction();
                             generateTransaction(transaction, line, std::stoi(year), isJanuaryStatement, lastFour, false, true);
@@ -179,8 +179,8 @@ void PdfProcessor::processPdfs(const std::string path) {
                         }
                     }
                     // Normal transactions that use the old format
-                    else if (std::regex_match(line, constants::regex::transactionPatternOld)) { 
-                        if (!std::regex_search(line, constants::regex::transactionSkip)) {
+                    else if (std::regex_match(line, constants::wells_fargo::regex::transactionPatternOld)) { 
+                        if (!std::regex_search(line, constants::wells_fargo::regex::transactionSkip)) {
                             RK_LOG("Line matched old pattern. Saving\n");
                             Transaction* transaction = new Transaction();
                             generateTransaction(transaction, line, std::stoi(year), isJanuaryStatement, lastFour, true, false);
@@ -192,7 +192,7 @@ void PdfProcessor::processPdfs(const std::string path) {
                         }
                     }
                     // Skipped, but possibly relevant lines
-                    else if (std::regex_search(line, constants::regex::transactionPatternSkippedRelevant)){
+                    else if (std::regex_search(line, constants::wells_fargo::regex::transactionPatternSkippedRelevant)){
                         RK_LOG("Line didn't match, but is possibly relevant. Skipping and adding to skipped file\n");
                         skippedLines << trim(line) << "\n";
                     }
@@ -260,10 +260,10 @@ void PdfProcessor::generateTransaction(Transaction* transaction, std::string lin
     if (!isInterestCharge) { // Skip retrieving ref num for interest charge as they don't have it
         RK_LOG("Getting reference number\n");
         const size_t refNumIdx = line.find_first_not_of(" ");
-        const std::string refNum = line.substr(refNumIdx, constants::REF_NUM_SIZE); // The length of a reference number is known, so use that value here.
+        const std::string refNum = line.substr(refNumIdx, constants::wells_fargo::REF_NUM_SIZE); // The length of a reference number is known, so use that value here.
         RK_LOG("Setting reference number to ", refNum, "\n");
         transaction->setRefNum(refNum);
-        line = line.substr(refNumIdx + constants::REF_NUM_SIZE);
+        line = line.substr(refNumIdx + constants::wells_fargo::REF_NUM_SIZE);
     }
     
     // Amount (currency)
