@@ -10,11 +10,11 @@
 #include <poppler/cpp/poppler-document.h>
 #include <poppler/cpp/poppler-page.h>
 #include <poppler/cpp/poppler-rectangle.h>
-#include "wells_fargo_statement_converter/pdf_processor.h"
+#include "bank_statement_converter/pdf_processor.h"
 #include "rk_logger/logger.h"
-#include "wells_fargo_statement_converter/exception_rk.h"
-#include "wells_fargo_statement_converter/constants.h"
-#include "wells_fargo_statement_converter/quick_sort.h"
+#include "bank_statement_converter/exception_rk.h"
+#include "bank_statement_converter/constants.h"
+#include "bank_statement_converter/quick_sort.h"
 
 std::string PdfProcessor::trim(const std::string str) const {
     RK_LOG("Trimming:", str, "\n");

@@ -6,15 +6,15 @@
 #include <chrono>
 #include <filesystem>
 #include "rk_logger/logger.h"
-#include "wells_fargo_statement_converter/pdf_processor.h"
-#include "wells_fargo_statement_converter/exception_rk.h"
-#include "wells_fargo_statement_converter/constants.h"
-#include "wells_fargo_statement_converter/quick_sort.h"
+#include "bank_statement_converter/pdf_processor.h"
+#include "bank_statement_converter/exception_rk.h"
+#include "bank_statement_converter/constants.h"
+#include "bank_statement_converter/quick_sort.h"
 
 int main() {
     std::thread logThread = rk::log::startLogger();
     const std::chrono::steady_clock::time_point startTime = std::chrono::steady_clock::now();
-    RK_LOG("Starting \"Wells Fargo Statement PDF to CSV Converter\"\n");
+    RK_LOG("Starting \"Bank Statement Converter\"\n");
     PdfProcessor pdfProcessor;
 
     try {         

@@ -2,7 +2,7 @@
  * @file date.cpp
  * @brief Source file for the Date class.
  */
-#include "wells_fargo_statement_converter/date.h"
+#include "bank_statement_converter/date.h"
 
 Date::Date() {}
 
