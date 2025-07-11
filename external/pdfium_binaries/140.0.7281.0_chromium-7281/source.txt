@@ -1,0 +1,1 @@
+The binaries were downloaded from: https://github.com/bblanchon/pdfium-binaries/releases/tag/chromium%2F7281.
