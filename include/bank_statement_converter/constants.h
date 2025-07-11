@@ -7,14 +7,23 @@
 
 #include <string>
 #include <regex>
+#include <unordered_map>
 
 namespace constants {
+    enum class Bank {
+        WELLS_FARGO = 0
+    };
+
+    extern const std::unordered_map<std::string, constants::Bank> BANKS;
+
     // File and directory names
     inline const std::string OUTPUT_DIRECTORY = "output";
     inline const std::string PDF_DIRECTORY = "statements_pdf";
     inline const std::string CSV_FILE_NAME = "combined_statements.csv";
     inline const std::string SKIPPED_LINES_FILE_NAME = "skipped_lines.txt";
     inline const std::string SKIPPED_FILES_FILE_NAME = "skipped_files.txt";
+    inline const std::string SKIPPED_FILE_PATH = "./" + constants::OUTPUT_DIRECTORY + "/" + constants::SKIPPED_FILES_FILE_NAME;
+    inline const std::string SKIPPED_LINES_PATH = "./" + constants::OUTPUT_DIRECTORY + "/" + constants::SKIPPED_LINES_FILE_NAME;
 
     namespace wells_fargo {
         // Known values
