@@ -1,6 +1,6 @@
 output
 build
-*.txt
+logs*.txt
 *.exe
 .vscode/settings.json
 statements_pdf
