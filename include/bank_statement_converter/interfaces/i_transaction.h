@@ -1,3 +1,6 @@
+#ifndef I_TRANSACTION_H
+#define I_TRANSACTION_H
+
 #include <string>
 
 #include "bank_statement_converter/date.h"
@@ -17,3 +20,5 @@ public:
     virtual void setDescription(const std::string&) = 0;
     virtual bool operator<=(const ITransaction&) = 0;
 };
+
+#endif // #ifndef I_TRANSACTION_H
