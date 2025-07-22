@@ -7,8 +7,10 @@
 
 #include <string>
 
-#include "bank_statement_converter/date.h"
-#include "bank_statement_converter/interfaces/i_transaction.h"
+#include <bank_statement_converter/date.h>
+#include <bank_statement_converter/interfaces/i_transaction.h>
+
+namespace bsc {
 
 /**
  * @class Transaction
@@ -31,7 +33,7 @@ public:
      * @param Date The Date object representing the date of the transaction.
      * @param std::string The description of the transaction.
      */
-    Transaction(const std::string& /* id */, const int /* accountNumber */, const double /* amount */, const std::string currency, const Date& /* date */, const std::string /* description */);
+    Transaction(const std::string& /* id */, const int /* accountNumber */, const double /* amount */, const std::string& currency, const Date& /* date */, const std::string& /* description */);
 
     std::string getId() const override;
 
@@ -49,6 +51,11 @@ public:
     const Date& getDate() const override;
 
     std::string getDescription() const override;
+
+    std::string asString() const override;
+
+    void setId(const std::string&) override;
+    void setAccountNumber(const int) override;
 
     void setAmount(const double) override;
 
@@ -79,7 +86,8 @@ public:
      * @param Transaction The Transaction to compare to.
      * @return The result of the comparison.
      */
-    bool operator<=(const ITransaction&) override;
+    bool operator<=(const ITransaction&) const override;
+
 private:
     std::string id;
     int accountNumber;
@@ -89,4 +97,6 @@ private:
     std::string description;
 };
 
-#endif
+} // namespace bsc
+
+#endif // #ifndef TRANSACTION_H

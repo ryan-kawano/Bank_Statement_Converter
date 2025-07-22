@@ -3,7 +3,9 @@
 
 #include <string>
 
-#include "bank_statement_converter/date.h"
+#include <bank_statement_converter/date.h>
+
+namespace bsc {
 
 class ITransaction {
 public:
@@ -14,11 +16,16 @@ public:
     virtual std::string getCurrency() const = 0;
     virtual const Date& getDate() const = 0;
     virtual std::string getDescription() const = 0;
+    virtual std::string asString() const = 0;
+    virtual void setId(const std::string&) = 0;
+    virtual void setAccountNumber(const int) = 0;
     virtual void setAmount(const double) = 0;
     virtual void setCurrency(const std::string&) = 0;
     virtual void setDate(const Date&) = 0;
     virtual void setDescription(const std::string&) = 0;
-    virtual bool operator<=(const ITransaction&) = 0;
+    virtual bool operator<=(const ITransaction&) const = 0;
 };
+
+} // namespace bsc
 
 #endif // #ifndef I_TRANSACTION_H
