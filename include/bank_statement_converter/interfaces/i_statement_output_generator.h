@@ -9,6 +9,10 @@
 
 namespace bsc {
 
+/**
+ * This interface defines the contract for classes that will generate the final output files
+ * from the processed bank statement data.
+ */
 class IStatementOutputGenerator {
 public:
     virtual ~IStatementOutputGenerator() = default;

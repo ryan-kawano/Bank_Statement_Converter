@@ -9,10 +9,25 @@
 
 namespace bsc {
 
+/**
+ * This interface defines the contract for classes that are responsible for parsing statement files
+ * and extracting the data. Once it has extracted the data, it shall delegate the actual processing
+ * of that data to other classes.
+ */
 class IStatementFileProcessor {
 public:
     using StatementLines = std::unordered_map<int, std::vector<std::string>>;
     virtual ~IStatementFileProcessor() = default;
+
+    /**
+     * @brief Processes a statement file at a given path and returns the created Statement.
+     * 
+     * Once it has extracted the data, it shall delegate the actual processing of the data to
+     * other classes.
+     * 
+     * @param std::filesystem::path The path to the statement file.
+     * @return std::shared_ptr<IStatement> The created statement.
+     */
     virtual std::shared_ptr<IStatement> processFile(const std::filesystem::path&) = 0;
 };
 

@@ -13,7 +13,7 @@ public:
     const std::vector<std::shared_ptr<ITransaction>>& getTransactions() const override;
     const Date& getDate() const override;
     const SkippedLines& getSkippedLines() const override;
-    size_t getCount() const override;
+    size_t getTransactionCount() const override;
 
     void setPath(std::filesystem::path&) override;
     void setDate(const Date&) override;

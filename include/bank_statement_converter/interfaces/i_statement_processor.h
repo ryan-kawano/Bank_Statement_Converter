@@ -5,6 +5,10 @@
 
 namespace bsc {
 
+/**
+ * This interface defines the contract for classes that are responsible for processing data extracted
+ * from statements and saving the data as an internal representation of a statement.
+ */
 class IStatementProcessor {
 public:
     virtual ~IStatementProcessor() = default;

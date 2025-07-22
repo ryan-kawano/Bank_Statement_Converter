@@ -19,7 +19,7 @@ const WellsFargoStatement::SkippedLines& WellsFargoStatement::getSkippedLines() 
     return skippedLines;
 }
 
-size_t WellsFargoStatement::getCount() const {
+size_t WellsFargoStatement::getTransactionCount() const {
     return this->transactions.size();
 }
 

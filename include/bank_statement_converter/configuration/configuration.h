@@ -24,6 +24,11 @@ public:
     bool getOutputOneFile() const { return outputOneFile; }
     const std::unordered_set<std::string>& getBanks() const { return banks; }
 
+    /**
+     * @brief Reads the config file at the provided path and updates the internal values.
+     * 
+     * @param std::filesystem::path The path to the config file including the filename and extension.
+     */
     void readConfigFile(const std::filesystem::path& path = std::filesystem::path(std::string(BANK_STATEMENT_CONVERTER_BINARY_DIRECTORY) + "/config.yaml"));
 
 private:
