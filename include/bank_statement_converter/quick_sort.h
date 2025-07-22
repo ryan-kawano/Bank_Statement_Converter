@@ -9,6 +9,8 @@
 
 #include <rk_logger/logger.h>
 
+namespace bsc {
+
 /**
  * @class QuickSort
  * @brief Implements the Quick Sort algorithm.
@@ -29,8 +31,6 @@ public:
      * @return The pivot index.
      */
     static int partition(std::vector<std::shared_ptr<T>>& vec, int lower, int higher) {
-        RK_LOG("Entering partition func\n");
-
         std::random_device rd; // For generating random pivot. Optimize this later
         std::mt19937 gen(rd()); // For generating random pivot. Optimize this later
 
@@ -64,8 +64,6 @@ public:
      * @param int The highest index of the portion to sort.
      */
     static void quickSort(std::vector<std::shared_ptr<T>>& vec, int lower, int higher) {
-        RK_LOG("Entering quickSort func\n");
-
         if (lower < higher) {
             int pivotIndex = partition(vec, lower, higher);
 
@@ -75,4 +73,6 @@ public:
     };
 };
 
-#endif
+} // namespace bsc
+
+#endif // #ifndef QUICK_SORT_H

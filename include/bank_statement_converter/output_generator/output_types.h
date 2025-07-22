@@ -3,7 +3,8 @@
 
 #include <unordered_map>
 
-namespace Output {
+namespace bsc {
+namespace output {
     enum class Format {
         CSV = 0,
         TXT,
@@ -11,6 +12,7 @@ namespace Output {
     };
 
     extern const std::unordered_map<std::string, Format> FORMAT_MAP;
-} // namespace Output
+} // namespace output
+} // namespace bsc
 
 #endif // #ifndef OUTPUT_TYPES_H

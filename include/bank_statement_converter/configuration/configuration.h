@@ -9,6 +9,8 @@
 #include <yaml-cpp/yaml.h>
 #include <yaml-cpp/node/convert.h>
 
+namespace bsc {
+
 class Configuration {
 public:
     static Configuration& instance() {
@@ -29,11 +31,14 @@ private:
     Configuration(const Configuration&) = delete;
     Configuration& operator=(const Configuration&) = delete;
 
-    std::filesystem::path statementsDirectory = "./statements";
+    /* The values below have default values. They can be set via the config file */
+    std::filesystem::path statementsDirectory = std::filesystem::current_path() / "statements";
     std::unordered_set<std::string> statementFileFormats = { "pdf" };
     std::unordered_set<std::string> outputFormats = { "csv" };
     bool outputOneFile = true;
     std::unordered_set<std::string> banks = { "Wells Fargo" };
 };
+
+} // namespace bsc
 
 #endif // #ifndef CONFIGURATION_H

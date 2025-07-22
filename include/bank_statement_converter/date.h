@@ -7,6 +7,8 @@
 
 #include <string>
 
+namespace bsc {
+
 /**
  * @class Date
  * @brief Simple class meant to represent a date in time.
@@ -25,14 +27,14 @@ public:
      * @param int month.
      * @param int day.
      */
-    Date(const int, const int, const int);
+    Date(const int /* year */, const int /* month */, const int /* day */);
 
     /**
      * @brief Copy constructor.
      * 
      * @param Date The Date object to copy from.
      */
-    Date(const Date&);
+    Date(const Date& /* date */);
 
     /**
      * @brief Formats the date in a user-friendly format and returns it.
@@ -87,4 +89,6 @@ private:
     int day;
 };
 
-#endif
+} // namespace bsc
+
+#endif // #ifndef DATE_H

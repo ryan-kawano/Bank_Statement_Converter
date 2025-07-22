@@ -3,6 +3,8 @@
 #include <bank_statement_converter/exception_rk.h>
 #include <bank_statement_converter/statement/statement_file_manager.h>
 
+namespace bsc {
+
 void StatementFileManager::gatherFiles(const std::filesystem::path& statementFilesPath, const std::unordered_set<std::string>& fileFormats) {
     RK_LOG("Gathering statement files from directory: ", statementFilesPath, "\n");
 
@@ -17,7 +19,7 @@ void StatementFileManager::gatherFiles(const std::filesystem::path& statementFil
         throw Exception(errMessage);
     }
 
-    // Go through the files in the directory and add it to the list if it is a .pdf file.
+    // Go through the files in the directory and add it to the list if it is a supported format.
     // Otherwise, add it to the skipped files.
     std::string fileName;
     for (const auto& entry : std::filesystem::directory_iterator(statementFilesPath)) {
@@ -29,8 +31,8 @@ void StatementFileManager::gatherFiles(const std::filesystem::path& statementFil
             continue;
         }
 
-        const auto iter = StatementFileFormat::FORMAT_MAP.find(entry.path().extension().string());
-        if (iter == StatementFileFormat::FORMAT_MAP.end()) {
+        const auto iter = bsc::statement_file_format::FORMAT_MAP.find(entry.path().extension().string());
+        if (iter == bsc::statement_file_format::FORMAT_MAP.end()) {
             RK_LOG("Entry ", entry, " doesn't have target file extension. Skipping\n");
             skippedFiles.push_back(entry);
             continue;
@@ -56,3 +58,5 @@ void StatementFileManager::reset() {
     files.clear();
     skippedFiles.clear();
 }
+
+} // namespace bsc

@@ -3,7 +3,9 @@
 
 #include <unordered_map>
 
-namespace StatementFileFormat {
+namespace bsc {
+namespace statement_file_format {
+
     enum class Format {
         PDF = 0,
         TXT,
@@ -11,6 +13,8 @@ namespace StatementFileFormat {
     };
 
     extern const std::unordered_map<std::string, Format> FORMAT_MAP;
-} // namespace StatementFileFormat
+
+} // namespace statement_file_format
+} // namespace bsc
 
 #endif // #ifndef STATEMENT_FILE_FORMAT_H

@@ -8,6 +8,8 @@
 #include <exception>
 #include <string>
 
+namespace bsc {
+
 /**
  * @class Exception
  * @brief A custom exception class.
@@ -19,5 +21,7 @@ public:
     explicit Exception(const std::string&);
     const char* what() const noexcept override;
 };
+
+} // namespace bsc
 
 #endif
