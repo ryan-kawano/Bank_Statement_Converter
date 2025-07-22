@@ -40,3 +40,9 @@ target_link_libraries(bank_statement_converter PRIVATE bank_statement_includes r
 add_subdirectory(${RK_LOGGER_SOURCE_DIR})
 add_subdirectory(${BANK_STATEMENT_CONVERTER_ROOT}/src/configuration)
 add_subdirectory(${BANK_STATEMENT_CONVERTER_ROOT}/src/statement_processor)
+
+add_custom_command(TARGET bank_statement_converter POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different
+            "${BANK_STATEMENT_CONVERTER_ROOT}/src/configuration/config.yaml"
+            $<TARGET_FILE_DIR:bank_statement_converter>/config.yaml
+)
