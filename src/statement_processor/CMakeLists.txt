@@ -12,7 +12,7 @@ set_target_properties(PDFium::PDFium PROPERTIES
 file(GLOB STATEMENT_PROCESSOR_SOURCES "*.cpp")
 add_library(statement_processor STATIC ${STATEMENT_PROCESSOR_SOURCES})
 
-target_link_libraries(statement_processor PRIVATE bank_statement_includes rk_logger PDFium::PDFium)
+target_link_libraries(statement_processor PUBLIC bank_statement_includes rk_logger PDFium::PDFium)
 
 target_include_directories(statement_processor PRIVATE "${PDFIUM_DIR}/include")
 
@@ -21,5 +21,5 @@ add_custom_command(
     TARGET statement_processor POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy_if_different
         "${PDFIUM_DIR}/bin/pdfium.dll"
-        $<TARGET_FILE_DIR:bank_statement_converter>
+        "$<TARGET_FILE_DIR:bank_statement_converter>/pdfium.dll"
 )
