@@ -1,6 +1,8 @@
 #include <bank_statement_converter/statement/wells_fargo_statement.h>
 #include <bank_statement_converter/quick_sort.h>
 
+namespace bsc {
+
 std::filesystem::path WellsFargoStatement::getPath() const {
     return path;
 }
@@ -15,6 +17,10 @@ const Date& WellsFargoStatement::getDate() const {
 
 const WellsFargoStatement::SkippedLines& WellsFargoStatement::getSkippedLines() const {
     return skippedLines;
+}
+
+size_t WellsFargoStatement::getCount() const {
+    return this->transactions.size();
 }
 
 void WellsFargoStatement::setPath(std::filesystem::path& path) {
@@ -34,5 +40,12 @@ void WellsFargoStatement::addSkippedLine(const std::string& line) {
 }
 
 void WellsFargoStatement::sort() {
-    QuickSort<ITransaction>::quickSort(transactions, 0, transactions.size());
+    RK_LOG("Sorting ", transactions.size(), " transactions\n");
+    QuickSort<ITransaction>::quickSort(transactions, 0, transactions.size() - 1);
 }
+
+bool WellsFargoStatement::operator<=(const IStatement& other) const {
+    return this->date <= other.getDate();
+}
+
+} // namespace bsc
