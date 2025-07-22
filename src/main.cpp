@@ -17,18 +17,18 @@
 
 int main() {
     std::thread logThread = rk::log::startLogger();
-    const std::chrono::steady_clock::time_point startTime = std::chrono::steady_clock::now();
     RK_LOG("Starting \"Bank Statement Converter\"\n");
-    StatementFileManager statementFileMgr;
-    StatementManager statementMgr;
-    OutputGeneratorFactory outputGenFactory;
+    const std::chrono::steady_clock::time_point startTime = std::chrono::steady_clock::now();
+    bsc::StatementFileManager statementFileMgr;
+    bsc::StatementManager statementMgr;
 
-    Configuration::instance().readConfigFile();
-    auto& config = Configuration::instance();
+    RK_LOG("Reading config file\n");
+    bsc::Configuration::instance().readConfigFile();
+    auto& config = bsc::Configuration::instance();
 
     try {
-        if (!std::filesystem::exists(constants::OUTPUT_DIRECTORY)) {
-            std::filesystem::create_directory(constants::OUTPUT_DIRECTORY);
+        if (!std::filesystem::exists(bsc::constants::OUTPUT_DIRECTORY)) {
+            std::filesystem::create_directory(bsc::constants::OUTPUT_DIRECTORY);
         }
 
         statementFileMgr.gatherFiles(config.getStatementsDirectory(), config.getStatementFileFormats());
@@ -36,32 +36,25 @@ int main() {
         statementMgr.sort();
    
         for (const auto& outputFormat : config.getOutputFormats()) {
-            const auto iter = Output::FORMAT_MAP.find(outputFormat);
-            if (iter != Output::FORMAT_MAP.end()) {
-                std::unique_ptr<IStatementOutputGenerator> generator = outputGenFactory.createOutputGenerator(iter->second);
-                generator->generate(statementMgr.getStatements(), std::filesystem::path(constants::OUTPUT_DIRECTORY)/"output");
+            const auto iter = bsc::output::FORMAT_MAP.find(outputFormat);
+            if (iter != bsc::output::FORMAT_MAP.end()) {
+                std::unique_ptr<bsc::IStatementOutputGenerator> generator = bsc::OutputGeneratorFactory::createOutputGenerator(iter->second);
+                generator->generate(statementMgr.getStatements(), (std::filesystem::path(bsc::constants::OUTPUT_DIRECTORY)/"output").replace_extension(std::string(".") + outputFormat));
             }
         }
 
-        generateSkippedFile(statementFileMgr.getskippedFiles(), "skipped_files");
-        generateSkippedFile(statementMgr.getSkippedLines(), "skipped_lines");
+        bsc::generateSkippedFile(statementFileMgr.getskippedFiles(), "skipped_files");
+        bsc::generateSkippedFile(statementMgr.getSkippedLines(), "skipped_lines");
     }
-    catch (const Exception& e) {
+    catch (const bsc::Exception& e) {
         RK_LOG("Caught exception: \"", e.what(), "\"\n");
-
-        std::chrono::steady_clock::time_point endTime = std::chrono::steady_clock::now();
-        auto duration = endTime - startTime;
         // duration_cast to milliseconds instead of seconds to preserve fractional portion
-        RK_LOG("Exiting due to exception. Program took: ", std::chrono::duration_cast<std::chrono::milliseconds>(duration).count() / 1000.0, " sec\n");
-
+        RK_LOG("Exiting due to exception. Program took: ", std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - startTime).count() / 1000.0, " sec\n");
         rk::log::stopLogger(std::move(logThread));
     }
 
-    std::chrono::steady_clock::time_point endTime = std::chrono::steady_clock::now();
-    auto duration = endTime - startTime;
     // duration_cast to milliseconds instead of seconds to preserve fractional portion
-    RK_LOG("Finished successfully. Processed ", statementMgr.getCount(), " transactions in ", std::chrono::duration_cast<std::chrono::milliseconds>(duration).count() / 1000.0, " sec\n");
-
+    RK_LOG("Finished successfully. Processed ", statementMgr.getCount(), " statements in ", std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - startTime).count() / 1000.0, " sec\n");
     rk::log::stopLogger(std::move(logThread));
 
     return 0;
