@@ -6,6 +6,8 @@
 
 #include <rk_logger/logger.h>
 
+namespace bsc {
+
 template<typename T>
 void generateSkippedFile(const std::vector<T> skipped, const std::string& type) {
     const std::string fileName = std::string("skipped_") + type + ".txt";
@@ -24,5 +26,7 @@ void generateSkippedFile(const std::vector<T> skipped, const std::string& type) 
     outFile.close();
     RK_LOG("Successfully created skipped file: ", fileName, "\n");
 }
+
+} // namespace bsc
 
 #endif // #ifndef SKIPPED_GENERATOR_H
