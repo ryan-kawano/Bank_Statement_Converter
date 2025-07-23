@@ -1,7 +1,3 @@
-/**
- * @file quick_sort.h
- * @brief Header file for quick sort.
- */
 #ifndef QUICK_SORT_H
 #define QUICK_SORT_H
 
@@ -24,9 +20,9 @@ public:
      * Chooses a random pivot by using the std::mt19937 random-number generator. Moves everything less than or equal
      * to the pivot, to the left of the pivot by using std::swap.
      * 
-     * @param std::vector<std::shared_ptr<T>> The vector to sort.
-     * @param int The lowest index of the portion to sort.
-     * @param int The highest index of the portion to sort.
+     * @param vec The vector to sort.
+     * @param lower The lowest index of the portion to sort.
+     * @param higher The highest index of the portion to sort.
      * 
      * @return The pivot index.
      */
@@ -59,9 +55,9 @@ public:
     /**
      * @brief Recursively executes the Quick Sort algorithm.
      * 
-     * @param std::vector<std::shared_ptr<T>> The vector to sort.
-     * @param int The lowest index of the portion to sort.
-     * @param int The highest index of the portion to sort.
+     * @param vec The vector to sort.
+     * @param lower The lowest index of the portion to sort.
+     * @param higher The highest index of the portion to sort.
      */
     static void quickSort(std::vector<std::shared_ptr<T>>& vec, int lower, int higher) {
         if (lower < higher) {

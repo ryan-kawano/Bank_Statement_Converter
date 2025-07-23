@@ -10,13 +10,14 @@
 namespace bsc {
 
 /**
- * This interface defines the contract for classes that will generate the final output files
+ * @class IStatementOutputGenerator
+ * @brief This interface defines the contract for classes that will generate the final output files
  * from the processed bank statement data.
  */
 class IStatementOutputGenerator {
 public:
     virtual ~IStatementOutputGenerator() = default;
-    virtual void generate(const std::vector<std::shared_ptr<IStatement>>&, const std::filesystem::path&) = 0;
+    virtual void generate(const std::vector<std::shared_ptr<IStatement>>& statements, std::filesystem::path& outputPath) = 0;
 };
 
 } // namespace bsc

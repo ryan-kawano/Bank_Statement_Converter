@@ -1,7 +1,3 @@
-/**
- * @file date.cpp
- * @brief Source file for the Date class.
- */
 #include <bank_statement_converter/date.h>
 
 namespace bsc {

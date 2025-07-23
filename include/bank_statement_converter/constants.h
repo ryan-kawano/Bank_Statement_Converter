@@ -1,6 +1,6 @@
 /**
  * @file constants.h
- * @brief Contains global constants used throughout the program.
+ * @brief Global constants used throughout the program.
  */
 #ifndef CONSTANTS_H
 #define CONSTANTS_H
@@ -11,7 +11,6 @@
 
 namespace bsc {
 namespace constants {
-
     enum class Bank {
         UNKNOWN = -1,
         WELLS_FARGO = 0
@@ -29,7 +28,6 @@ namespace constants {
     inline const std::string SKIPPED_LINES_PATH = "./" + bsc::constants::OUTPUT_DIRECTORY + "/" + bsc::constants::SKIPPED_LINES_FILE_NAME;
 
     namespace wells_fargo {
-
         // Known values
         constexpr size_t REF_NUM_SIZE = 17; /**< The amount of characters in a reference number */
 

@@ -23,13 +23,26 @@ public:
     virtual const SkippedLines& getSkippedLines() const = 0;
     virtual size_t getTransactionCount() const = 0;
 
-    virtual void setPath(std::filesystem::path&) = 0;
-    virtual void setDate(const Date&) = 0;
-    virtual void addTransaction(std::shared_ptr<ITransaction>) = 0;
-    virtual void addSkippedLine(const std::string&) = 0;
+    virtual void setPath(std::filesystem::path& path) = 0;
+    virtual void setDate(const Date& date) = 0;
+    virtual void addTransaction(std::shared_ptr<ITransaction> transaction) = 0;
+
+    /**
+     * @brief Adds a line from a statement that was skipped to a container of skipped lines.
+     * 
+     * @param line The skipped line.
+     */
+    virtual void addSkippedLine(const std::string& line) = 0;
 
     virtual void sort() = 0;
-    virtual bool operator<=(const IStatement&) const = 0;
+
+    /**
+     * @brief Overloaded <= operator to compare statements.
+     * 
+     * Statement should be compared by their dates
+     * in chronological order, i.e., earlier statements come before later statements.
+     */
+    virtual bool operator<=(const IStatement& other) const = 0;
 };
 
 } // namespace bsc

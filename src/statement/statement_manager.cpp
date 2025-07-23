@@ -26,15 +26,18 @@ void StatementManager::parseStatements(const std::vector<StatementFileManager::F
     }
 }
 
+/**
+ * Sorts the transactions within the statements first, then sorts the statements themselves.
+ */
 void StatementManager::sort() {
     RK_LOG("Sorting ", statements.size(), " statements\n");
 
-    // Sort the transactions within the statements first
+    // Sort transactions within statements
     for (const auto& statement : statements) {
         statement->sort();
     }
 
-    // Then, sort the statements themselves
+    // Sort statements
     QuickSort<IStatement>::quickSort(statements, 0, statements.size() - 1);
 }
 
@@ -52,7 +55,7 @@ const IStatement::SkippedLines StatementManager::getSkippedLines() const {
     return result;
 }
 
-size_t StatementManager::getCount() const {
+size_t StatementManager::getStatementCount() const {
     return statements.size();
 }
 

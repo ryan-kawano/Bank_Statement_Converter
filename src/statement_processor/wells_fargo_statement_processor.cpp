@@ -18,9 +18,11 @@ void WellsFargoStatementProcessor::processLines(std::shared_ptr<IStatement> stat
     int transactionTitleCount = 0;
     std::string currency = "USD"; // Hardcoded for now, fix later
 
+    // For each page of the statement
     for (const auto& [page_num, page_lines] : lines) {
         RK_LOG("Processing lines from page ", page_num, "\n");
 
+        // For each line of the page
         for (const auto& line : page_lines) {
             RK_LOG("Processing line: ", line.substr(0, MAX_LINE_LENGTH), (line.size() > MAX_LINE_LENGTH ? "..." : ""), "\n");
 
@@ -34,12 +36,14 @@ void WellsFargoStatementProcessor::processLines(std::shared_ptr<IStatement> stat
                  */
                 if (std::regex_search(line, matchResults, std::regex("Statement Period (\\d{2}/\\d{2}/\\d{4}) to (\\d{2}/\\d{2}/\\d{4})")) || std::regex_search(line, matchResults, std::regex("(\\d{2}/\\d{2}/\\d{4}) to (\\d{2}/\\d{2}/\\d{4})"))) {
                     RK_LOG("Line matched statement period pattern. Extracting date\n");
+
                     const std::string date = matchResults[2];
                     month = date.substr(0, 2);
                     day = date.substr(3, 2);
                     year = date.substr(6, 4);
                     isJanuaryStatement = month == "01";
                     statement->setDate(Date(std::stoi(year), std::stoi(month), std::stoi(day)));
+
                     RK_LOG("Set date to ", month, "/", day, "/", year, "\n");
                     isDateFound = true;
                     continue;
@@ -97,9 +101,8 @@ void WellsFargoStatementProcessor::processLines(std::shared_ptr<IStatement> stat
                     statement->addSkippedLine(bsc::utility::trim(line) + "\n");
                 }
             }
-            else /*if (std::regex_search(line, bsc::constants::wells_fargo::regex::transactionPatternSkippedRelevant)) */ {
-                // Skipped, but possibly relevant lines
-                /*RK_LOG("Line didn't match, but is possibly relevant. Skipping and adding to skipped file\n");*/
+            // Skipped, but possibly relevant lines
+            else {
                 statement->addSkippedLine(bsc::utility::trim(line) + "\n");
             }
         }

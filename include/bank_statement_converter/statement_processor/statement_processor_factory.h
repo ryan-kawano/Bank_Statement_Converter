@@ -9,6 +9,12 @@ namespace bsc {
 
 class StatementProcessorFactory {
 public:
+    /**
+     * @brief Creates and returns a statement processor based on the given bank.
+     * 
+     * @param bank The bank that the statement is from.
+     * @return Processor for a given bank.
+     */
     static std::unique_ptr<IStatementProcessor> createStatementProcessor(const bsc::constants::Bank bank) {
         switch (bank) {
             case bsc::constants::Bank::WELLS_FARGO:

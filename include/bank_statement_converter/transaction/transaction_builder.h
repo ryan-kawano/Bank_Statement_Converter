@@ -9,8 +9,23 @@
 
 namespace bsc {
 
+/**
+ * @class TransactionBuilder
+ * @brief Responsible for building transactions given certain transaction data.
+ */
 class TransactionBuilder {
 public:
+    /**
+     * @brief Builds a transaction with the provided data.
+     * 
+     * @param line Line from a bank statement that contains information about the transaction.
+     * @param year Year of the statement that the transaction is from.
+     * @param currency Currency type of the transaction, e.g., USD, EUR, JPY, etc
+     * @param isJanuaryStatement Whether the statement is from January.
+     * @param isOldFormat Whether the statement is in the old format.
+     * @param isInterestCharge Whether the transaction is an interest charge.
+     * @return A transaction populated with the given data.
+     */
     static std::shared_ptr<ITransaction> buildTransaction(std::string line, int year, const std::string currency, const bool isJanuaryStatement, const bool isOldFormat = false, const bool isInterestCharge = false) {
         RK_LOG("Generating transaction\n");
         std::shared_ptr<ITransaction> transaction = std::make_shared<Transaction>();
@@ -60,7 +75,7 @@ public:
             transaction->setId("N/A");
         }
         
-        // Amount (currency)
+        // Amount
         RK_LOG("Getting amount\n");
         line = bsc::utility::trim(line);
         const size_t amountIdx = line.rfind(' ') + 1;

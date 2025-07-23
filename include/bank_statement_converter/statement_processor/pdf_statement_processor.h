@@ -13,9 +13,19 @@
 
 namespace bsc {
 
+/**
+ * @class PdfStatementProcessor
+ * @brief Responsible for processing statements in PDF format.
+ */
 class PdfStatementProcessor : public IStatementFileProcessor {
 public:
-    std::shared_ptr<IStatement> processFile(const std::filesystem::path&) override;
+    /**
+     * @brief Processes a PDF statement file and returns a corresponding statement object.
+     * 
+     * @param path The path to the statement file.
+     * @return The created IStatement object.
+     */
+    std::shared_ptr<IStatement> processFile(const std::filesystem::path& path) override;
 
 private:
     FPDF_DOCUMENT openFile(const std::filesystem::path&) const;

@@ -54,7 +54,7 @@ const std::vector<std::filesystem::path> StatementFileManager::getskippedFiles()
 }
 
 void StatementFileManager::reset() {
-    RK_LOG("Resetting Statement File Manager\n");
+    RK_LOG("Resetting StatementFileManager\n");
     files.clear();
     skippedFiles.clear();
 }

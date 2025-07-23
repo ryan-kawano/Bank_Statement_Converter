@@ -9,8 +9,18 @@
 
 namespace bsc {
 
+/**
+ * @class TransactionAdapter
+ * @brief Responsible for adapting transactions to various formats.
+ */
 class TransactionAdapter {
 public:
+    /**
+     * @brief Processes a transaction and returns a copy in CSV format.
+     * 
+     * @param transaction The ITransaction object to convert.
+     * @return The converted transaction as CSV text.
+     */
     static std::string toCsv(const std::shared_ptr<ITransaction> transaction) {
         std::stringstream ss;
         ss << "\""

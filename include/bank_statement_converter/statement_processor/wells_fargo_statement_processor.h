@@ -6,7 +6,13 @@
 namespace bsc {
 
 class WellsFargoStatementProcessor : public IStatementProcessor {
-    void processLines(std::shared_ptr<IStatement>, IStatementFileProcessor::StatementLines) const override;
+    /**
+     * @brief Processes lines of a Wells Fargo statement.
+     * 
+     * @param statement Statement object to populate.
+     * @param lines Container of lines from the statement.
+     */
+    void processLines(std::shared_ptr<IStatement> statement, IStatementFileProcessor::StatementLines lines) const override;
 };
 
 } // namespace bsc

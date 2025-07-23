@@ -54,7 +54,7 @@ int main() {
     }
 
     // duration_cast to milliseconds instead of seconds to preserve fractional portion
-    RK_LOG("Finished successfully. Processed ", statementMgr.getCount(), " statements in ", std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - startTime).count() / 1000.0, " sec\n");
+    RK_LOG("Finished successfully. Processed ", statementMgr.getStatementCount(), " statements in ", std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - startTime).count() / 1000.0, " sec\n");
     rk::log::stopLogger(std::move(logThread));
 
     return 0;

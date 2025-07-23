@@ -4,9 +4,27 @@
 
 namespace bsc {
 
-void CsvOutputGenerator::generate(const std::vector<std::shared_ptr<IStatement>>& statements, const std::filesystem::path& outputPath) {
+void CsvOutputGenerator::generate(const std::vector<std::shared_ptr<IStatement>>& statements, std::filesystem::path& outputPath) {
     RK_LOG("Generating CSV output\n");
 
+    if (statements.empty()) {
+        RK_LOG("No statements provided for CSV generation\n");
+        return;
+    }
+    if (!outputPath.has_extension()) {
+        RK_LOG("Output file does not have an extension, adding .csv\n");
+        outputPath += ".csv";
+    } else if (outputPath.extension() != "csv") {
+        outputPath.replace_extension("csv");
+        RK_LOG("Output file extension changed to .csv\n");
+    }
+
+    if (outputPath.is_directory()) {
+        RK_LOG("Output path is a directory, appending default file name 'output.csv'\n");
+        outputPath /= "output.csv";
+    }
+
+    RK_LOG("Output file path: %s\n", outputPath.string().c_str());
     std::ofstream outFile(outputPath);
     if (!outFile) {
         RK_LOG("Unable to open output file for CSV generation\n");

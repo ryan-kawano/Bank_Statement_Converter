@@ -16,7 +16,7 @@ target_link_libraries(statement_processor PUBLIC bank_statement_includes rk_logg
 
 target_include_directories(statement_processor PRIVATE "${PDFIUM_DIR}/include")
 
-# Copy PDFium DLL to executable directory
+# Copy PDFium DLL to executable directory. Required at runtime.
 add_custom_command(
     TARGET statement_processor POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy_if_different

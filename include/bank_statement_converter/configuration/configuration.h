@@ -27,7 +27,7 @@ public:
     /**
      * @brief Reads the config file at the provided path and updates the internal values.
      * 
-     * @param std::filesystem::path The path to the config file including the filename and extension.
+     * @param The path to the config file including the filename and extension.
      */
     void readConfigFile(const std::filesystem::path& path = std::filesystem::path(std::string(BANK_STATEMENT_CONVERTER_BINARY_DIRECTORY) + "/config.yaml"));
 
@@ -39,9 +39,9 @@ private:
     /* The values below have default values. They can be set via the config file */
     std::filesystem::path statementsDirectory = std::filesystem::current_path() / "statements";
     std::unordered_set<std::string> statementFileFormats = { "pdf" };
-    std::unordered_set<std::string> outputFormats = { "csv" };
-    bool outputOneFile = true;
-    std::unordered_set<std::string> banks = { "Wells Fargo" };
+    std::unordered_set<std::string> outputFormats = { "csv" }; /**< The format of the final output file(s) that will be created */
+    bool outputOneFile = true; /**< Whether to output all statements as one file or separate files */
+    std::unordered_set<std::string> banks = { "Wells Fargo" }; /**< The banks for the statements that the user provided */
 };
 
 } // namespace bsc

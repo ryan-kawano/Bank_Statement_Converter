@@ -11,6 +11,13 @@ namespace bsc {
 
 class OutputGeneratorFactory {
 public:
+
+    /**
+     * @brief Creates output generator instances based on the desired file type.
+     * 
+     * @param format The desired file format.
+     * @return The created output generator.
+     */
     static std::unique_ptr<IStatementOutputGenerator> createOutputGenerator(const bsc::output::Format format) {
         switch (format) {
             case bsc::output::Format::CSV:

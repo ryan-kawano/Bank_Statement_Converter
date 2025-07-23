@@ -6,13 +6,14 @@
 namespace bsc {
 
 /**
- * This interface defines the contract for classes that are responsible for processing data extracted
+ * @class IStatementProcessor
+ * @brief This interface defines the contract for classes that are responsible for processing data extracted
  * from statements and saving the data as an internal representation of a statement.
  */
 class IStatementProcessor {
 public:
     virtual ~IStatementProcessor() = default;
-    virtual void processLines(std::shared_ptr<IStatement>, bsc::IStatementFileProcessor::StatementLines) const = 0;
+    virtual void processLines(std::shared_ptr<IStatement> statement, bsc::IStatementFileProcessor::StatementLines lines) const = 0;
 };
 
 } // namespace bsc
