@@ -122,7 +122,7 @@ The project can be built using Microsoft's CMake extension for VSCode.
   </li>
 
   <li>
-    Install the <a href="https://marketplace.cursorapi.com/items/?itemName=ms-vscode.cmake-tools">CMake Tools Extension</a> for VSCode.
+    Install the <a href="https://marketplace.visualstudio.com/items?itemName=ms-vscode.cmake-tools">CMake Tools Extension</a> for VSCode.
   </li>
 
   <li>
