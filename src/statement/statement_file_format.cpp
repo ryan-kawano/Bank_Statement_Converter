@@ -1,4 +1,5 @@
 #include <bank_statement_converter/statement/statement_file_format.h>
+#include <string>
 
 namespace bsc {
 namespace statement_file_format {

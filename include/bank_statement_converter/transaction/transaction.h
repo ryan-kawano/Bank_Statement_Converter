@@ -46,8 +46,8 @@ public:
     void setAccountNumber(const int accountNumber) override;
     void setAmount(const double amount) override;
     void setCurrency(const std::string& currency) override;
-    void setDescription(const std::string& description);
-    void setDate(const Date& date);
+    void setDescription(const std::string& description) override;
+    void setDate(const Date& date) override;
 
     /**
      * @brief Overloaded <= operator.

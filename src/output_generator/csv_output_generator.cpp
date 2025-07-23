@@ -19,7 +19,7 @@ void CsvOutputGenerator::generate(const std::vector<std::shared_ptr<IStatement>>
         RK_LOG("Output file extension changed to .csv\n");
     }
 
-    if (outputPath.is_directory()) {
+    if (std::filesystem::is_directory(outputPath)) {
         RK_LOG("Output path is a directory, appending default file name 'output.csv'\n");
         outputPath /= "output.csv";
     }

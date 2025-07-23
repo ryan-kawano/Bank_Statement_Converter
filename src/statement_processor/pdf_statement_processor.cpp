@@ -8,7 +8,7 @@
 #include <bank_statement_converter/utility.h>
 #include <bank_statement_converter/constants.h>
 #include <bank_statement_converter/interfaces/i_statement_processor.h>
-#include <bank_statement_converter/statement_processor./statement_processor_factory.h>
+#include <bank_statement_converter/statement_processor/statement_processor_factory.h>
 
 namespace bsc {
 
