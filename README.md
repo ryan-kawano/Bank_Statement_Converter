@@ -32,7 +32,8 @@
       <a href="#getting-started">Getting Started</a>
       <ul>
         <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#building">Building</a></li>
+        <li><a href="#building-visual-studio-code">Building (Visual Studio Code)</a></li>
+        <li><a href="#building-manual">Building (Manual)</a></li>
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
