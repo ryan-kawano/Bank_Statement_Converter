@@ -1,12 +1,11 @@
-/**
- * @file quick_sort.h
- * @brief Header file for quick sort.
- */
 #ifndef QUICK_SORT_H
 #define QUICK_SORT_H
 
 #include <random>
-#include "transaction.h"
+
+#include <rk_logger/logger.h>
+
+namespace bsc {
 
 /**
  * @class QuickSort
@@ -21,15 +20,13 @@ public:
      * Chooses a random pivot by using the std::mt19937 random-number generator. Moves everything less than or equal
      * to the pivot, to the left of the pivot by using std::swap.
      * 
-     * @param std::vector<T*> The vector to sort.
-     * @param int The lowest index of the portion to sort.
-     * @param int The highest index of the portion to sort.
+     * @param vec The vector to sort.
+     * @param lower The lowest index of the portion to sort.
+     * @param higher The highest index of the portion to sort.
      * 
      * @return The pivot index.
      */
-    static int partition(std::vector<T*>& vec, int lower, int higher) {
-        RK_LOG("Entering partition func\n");
-
+    static int partition(std::vector<std::shared_ptr<T>>& vec, int lower, int higher) {
         std::random_device rd; // For generating random pivot. Optimize this later
         std::mt19937 gen(rd()); // For generating random pivot. Optimize this later
 
@@ -37,7 +34,7 @@ public:
         int randomPivotIdx = dist(gen);
 
         std::swap(vec[randomPivotIdx], vec[higher]); // Move pivot to the end
-        T* pivot = vec[higher];
+        std::shared_ptr<T> pivot = vec[higher];
         int i = lower - 1; // For tracking lower numbers
 
         // Go through vector and move numbers less than or equal to the pivot, to the left of pivot
@@ -58,13 +55,11 @@ public:
     /**
      * @brief Recursively executes the Quick Sort algorithm.
      * 
-     * @param std::vector<T*> The vector to sort.
-     * @param int The lowest index of the portion to sort.
-     * @param int The highest index of the portion to sort.
+     * @param vec The vector to sort.
+     * @param lower The lowest index of the portion to sort.
+     * @param higher The highest index of the portion to sort.
      */
-    static void quickSort(std::vector<T*>& vec, int lower, int higher) {
-        RK_LOG("Entering quickSort func\n");
-
+    static void quickSort(std::vector<std::shared_ptr<T>>& vec, int lower, int higher) {
         if (lower < higher) {
             int pivotIndex = partition(vec, lower, higher);
 
@@ -74,4 +69,6 @@ public:
     };
 };
 
-#endif
+} // namespace bsc
+
+#endif // #ifndef QUICK_SORT_H

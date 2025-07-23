@@ -32,7 +32,8 @@
       <a href="#getting-started">Getting Started</a>
       <ul>
         <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#building">Building</a></li>
+        <li><a href="#building-visual-studio-code">Building (Visual Studio Code)</a></li>
+        <li><a href="#building-manual">Building (Manual)</a></li>
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
@@ -71,9 +72,9 @@
 
 ## Output
 
-The final output will be in a file called `combined_statements.csv` and the format for each transaction will be:
+The final output will be in a file called `output.csv` and the format for each transaction will be:
 
-`"<LAST FOUR NUMBERS OF ACCOUNT>","TRANSACTION DATE","REFERENCE NUMBER","TRANSACTION NAME","CURRENCY AMOUNT"`.
+`"<ACCOUNT NUMBER (truncated)>","<TRANSACTION DATE>","<ID>","<TRANSACTION NAME>","<CURRENCY AMOUNT>"`.
 
 For example:
 
@@ -90,7 +91,8 @@ It will also create these files:
 ## Built With
 
 - [![C++][C++]][C++-url]
-- [![Poppler][Poppler]][Poppler-url]
+- [![pdfium][pdfium]][pdfium-url]
+- [![CMake][CMake]][CMake-url]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -98,22 +100,63 @@ It will also create these files:
 
 ## Getting Started
 
-You may either download the compiled program from the release section of this GitHub page or build the program by following the instructions below.
+Pre-built exectuables will be provided in the future, but for now the project must be built locally. Please follow the instructions below to build the program.
 
 ### Prerequisites
 
 - A C++ compiler.
-- The Poppler library installed locally.
+- CMake.
 
-### Building
+### Building (Visual Studio Code)
+
+The project can be built using Microsoft's CMake extension for VSCode.
 
 <ol>
-  <li>Clone this repo, along with the submodules.
-
-<code>git clone --recurse-submodules https://github.com/ryan-kawano/Bank_Statement_Converter</code>
-
+  <li>
+    Clone this repo, along with the submodules.</br>
+    <code>git clone --recurse-submodules https://github.com/ryan-kawano/Bank_Statement_Converter</code>
   </li>
-  <li>Build the project in Visual Studio Code using the provided VS Code setting files <a href=".vscode/launch.json">launch.json</a> and <a href=".vscode/tasks.json">tasks.json</a>. They might need to be updated based on what compiler you are using and where you have Poppler installed. I recommend getting it from MSYS2 in order to match the files.</li>
+
+  <li>
+    Open the cloned project in VSCode.
+  </li>
+
+  <li>
+    Install the <a href="https://marketplace.cursorapi.com/items/?itemName=ms-vscode.cmake-tools">CMake Tools Extension</a> for VSCode.
+  </li>
+
+  <li>
+    Open the CMake side-panel (usually on the left-hand side).
+  </li>
+
+  <li>
+    Go through the flow provided in the menu.</br>
+    <code>Configure -> Build</code>
+  </li>
+</ol>
+
+### Building (Manual)
+
+<ol>
+  <li>
+    Clone this repo, along with the submodules.</br>
+    <code>git clone --recurse-submodules https://github.com/ryan-kawano/Bank_Statement_Converter</code>
+  </li>
+
+  <li>
+    From the root of this project, make a build directory.</br>
+    <code>mkdir build</code>
+  </li>
+
+  <li>
+    Generate the build system using the provided CMake files. From the <code>build</code> directory that was created in the previous step, execute the command below. You may specify a build system in the command or let CMake use the default one for your system.</br>
+    <code>cmake ..</code>
+  </li>
+
+  <li>
+    Build the project by running the command below from the <code>build</code> directory.</br>
+    <code>cmake --build . -j</code>
+  </li>
 </ol>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -124,10 +167,11 @@ You may either download the compiled program from the release section of this Gi
 
 <ol>
   <li>Navigate to the directory where the program is.</li>
-  <li>In the same directory as the compiled executable, create a directory called <code>statements_pdf</code>.</li>
-  <li>Place the PDF statements that you want converted into <code>statements_pdf</code>. <strong>Do not rename the files after downloading them</strong>. The program extracts information such as the date from the file name.</li>
+  <li>In the same directory as the compiled executable, create a directory called <code>statements</code>.</li>
+  <li>Place the PDF statements that you want converted into <code>statements</code>.</li>
+  <li><strong>Optional:</strong> Copy the config file located <a href=src/configuration/config.yaml>here</a> into the same directory that the executable is in. Modify the settings as you wish.</li>
   <li>Run the executable by double-clicking it.</li>
-  <li>A folder called <code>output</code> will be created. Inside it will be the final CSV file and other logs from execution.</li>
+  <li>A folder called <code>output</code> will be created. Inside it will be the final CSV file(s) and other logs from execution.</li>
 </ol>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -137,7 +181,7 @@ You may either download the compiled program from the release section of this Gi
 ## Acknowledgments
 
 - [Best-README-Template](https://github.com/othneildrew/Best-README-Template) for this README template.
-
+- [pdfium](https://pdfium.googlesource.com/pdfium/) for parsing PDF statements.
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- MARKDOWN LINKS & IMAGES -->
@@ -145,5 +189,7 @@ You may either download the compiled program from the release section of this Gi
 
 [C++]: https://img.shields.io/badge/-C++-blue?logo=cplusplus
 [C++-url]: https://en.wikipedia.org/wiki/C%2B%2B
-[Poppler]: https://img.shields.io/badge/Poppler-blue.svg?style=flat-square
-[Poppler-url]: https://poppler.freedesktop.org/
+[pdfium]: https://img.shields.io/badge/pdfium-blue
+[pdfium-url]: https://pdfium.googlesource.com/pdfium
+[CMake]: https://img.shields.io/badge/CMake-064F8C?logo=cmake&logoColor=fff
+[CMake-url]: https://cmake.org/

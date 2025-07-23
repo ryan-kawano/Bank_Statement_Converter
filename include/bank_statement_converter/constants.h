@@ -1,20 +1,31 @@
 /**
  * @file constants.h
- * @brief Contains global constants used throughout the program.
+ * @brief Global constants used throughout the program.
  */
 #ifndef CONSTANTS_H
 #define CONSTANTS_H
 
 #include <string>
 #include <regex>
+#include <unordered_map>
 
+namespace bsc {
 namespace constants {
+    enum class Bank {
+        UNKNOWN = -1,
+        WELLS_FARGO = 0
+    };
+
+    extern const std::unordered_map<std::string, bsc::constants::Bank> BANKS;
+
     // File and directory names
     inline const std::string OUTPUT_DIRECTORY = "output";
     inline const std::string PDF_DIRECTORY = "statements_pdf";
     inline const std::string CSV_FILE_NAME = "combined_statements.csv";
     inline const std::string SKIPPED_LINES_FILE_NAME = "skipped_lines.txt";
     inline const std::string SKIPPED_FILES_FILE_NAME = "skipped_files.txt";
+    inline const std::string SKIPPED_FILE_PATH = "./" + bsc::constants::OUTPUT_DIRECTORY + "/" + bsc::constants::SKIPPED_FILES_FILE_NAME;
+    inline const std::string SKIPPED_LINES_PATH = "./" + bsc::constants::OUTPUT_DIRECTORY + "/" + bsc::constants::SKIPPED_LINES_FILE_NAME;
 
     namespace wells_fargo {
         // Known values
@@ -44,6 +55,8 @@ namespace constants {
             const std::regex lastFourPattern(LAST_FOUR);
         } // namespace regex
     } // namespace wells_fargo
+
 } // namespace constants
+} // namespace bsc
 
 #endif

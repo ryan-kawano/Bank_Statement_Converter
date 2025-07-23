@@ -1,0 +1,9 @@
+config:
+  statements_directory: "./statements"
+  statement_file_formats:
+    - "pdf"
+  banks:
+    - "Wells Fargo"
+  output_formats:
+    - "csv"
+  output_one_file: true

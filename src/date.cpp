@@ -1,14 +1,12 @@
-/**
- * @file date.cpp
- * @brief Source file for the Date class.
- */
-#include "bank_statement_converter/date.h"
+#include <bank_statement_converter/date.h>
+
+namespace bsc {
 
 Date::Date() {}
 
-Date::Date(const int pYear, const int pMonth, const int pDay) : year(pYear), month(pMonth), day(pDay) {}
+Date::Date(const int year, const int month, const int day) : year(year), month(month), day(day) {}
 
-Date::Date(const Date& pDate) : year(pDate.year), month(pDate.month), day(pDate.day) {}
+Date::Date(const Date& date) : year(date.year), month(date.month), day(date.day) {}
 
 std::string Date::getDateString() const {
     return "[" + std::to_string(month) + "/" + std::to_string(day) + "/" + std::to_string(year) + "]";
@@ -52,3 +50,5 @@ int Date::getMonth() const {
 int Date::getDay() const {
     return day;
 }
+
+} // namespace bsc
