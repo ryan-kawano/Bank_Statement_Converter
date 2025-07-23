@@ -145,23 +145,17 @@ The project can be built using Microsoft's CMake extension for VSCode.
 
   <li>
     From the root of this project, make a build directory.</br>
-    <code>
-      mkdir build
-    </code>
+    <code>mkdir build</code>
   </li>
 
   <li>
     Generate the build system using the provided CMake files. From the <code>build</code> directory that was created in the previous step, execute the command below. You may specify a build system in the command or let CMake use the default one for your system.</br>
-    <code>
-      cmake ..
-    </code>
+    <code>cmake ..</code>
   </li>
 
   <li>
     Build the project by running the command below from the <code>build</code> directory.</br>
-    <code>
-      cmake --build . -j
-    </code>
+    <code>cmake --build . -j</code>
   </li>
 </ol>
 
